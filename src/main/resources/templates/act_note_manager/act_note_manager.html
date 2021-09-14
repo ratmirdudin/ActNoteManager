@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Менеджер А/З</title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <h1>Менеджер А/З о рождении</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3" sec:authorize="hasAuthority('ADMIN')">
+            <a class="btn btn-success" href="/act_note_manager/new">Новая актовая запись</a>
+        </div>
+    </div>
+
+    <br/>
+    <table class="table table-striped table-bordered table-condensed text-center">
+        <thead class="table-light">
+        <tr>
+            <th> Порядковый</br>номер </th>
+            <th> Дата</br>регистрации </th>
+            <th> Дата</br>изменения</th>
+            <th> Фамилия</br>матери </th>
+            <th> Фамилия</br>ребенка </th>
+
+            <th sec:authorize="hasAuthority('ADMIN')">Действия</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="actNote : ${listActNotes}">
+            <td th:text="${actNote.id}"></td>
+            <td th:text="${actNote.dateOfRegistration}"></td>
+            <td th:text="${actNote.dateOfChange}"></td>
+            <td th:text="${actNote.parentSurname}"></td>
+            <td th:text="${actNote.childSurname}"></td>
+
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{'/act_note_manager/id-' + ${actNote.id}}"
+                   class="btn btn-primary btn-sm">Просмотр</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

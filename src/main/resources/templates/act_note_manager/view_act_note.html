@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title> Новая запись </title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+</svg>
+
+<div class="container mt-3">
+    <a class="btn btn-secondary btn-sm" href="javascript:history.back()"> Назад </a>
+    <div class="container justify-content-center card bg-light">
+        <div class="row">
+            <div class="card-header text-center">
+                <h2>Просмотр А/З</h2>
+                <h2>
+                    номер
+                    <u>
+                        <th:block th:text="${actNote.id}"></th:block>
+                    </u>
+                </h2>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col">
+                    <div class="row text-center mt-3 mb-3">
+                        <div class="col">
+                            <p><b> Дата изменения:</b>
+                                <u>
+                                    <th:block th:text="${actNote.dateOfChange}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Дата регистрации:</b>
+                                <u>
+                                    <th:block th:text="${actNote.dateOfRegistration}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row text-center mt-3 mb-3">
+                        <div class="col">
+                            <a sec:authorize="hasAuthority('ADMIN')"
+                               th:href="@{'/act_note_manager/id-' + ${actNote.id} + '/edit'}"
+                               class="btn btn-primary btn-sm"> Редактировать <br> актовую запись </a>
+                        </div>
+                        <div class="col">
+                            <a sec:authorize="hasAuthority('ADMIN')"
+                               th:href="@{'/act_note_manager/id-' + ${actNote.id} + '/delete'}"
+                               class="btn btn-danger btn-sm"> Удалить <br> актовую запись </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card bg-light">-->
+            <div class="col card bg-light">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="alert alert-primary d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                                <use xlink:href="#info-fill"/>
+                            </svg>
+                            <div>
+                                <strong>Сведения о ребенке: </strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Имя:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childName}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Фамилия:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childSurname}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Отчество:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childPatronymic}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> ИИН:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childIin}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Пол:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childGender}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Дата рождения:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childDateOfBirth}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Сколько родилось детей:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childNumberOfChildrenBorn}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Статус при рождении:</b>
+                                <u>
+                                    <th:block th:text="${actNote.statusOfNewborn}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <div>
+                                <strong>Место рождения:</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Страна:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childCountry}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Населенный пункт:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childPopulatedLocality}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <div>
+                                <strong>Документы, подтверждающие факт рождения ребенка:</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Тип документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childTypeOfDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Номер документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childNumberOfDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Орган выдачи документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childIssuingAuthority}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Дата выдачи документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.childDateOfIssueOfTheDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col card bg-light">
+                <div class="card-body">
+                    <!--////////////////////////////РОДИТЕЛИ//////////////////////-->
+                    <div class="row">
+                        <div class="alert alert-primary d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                                <use xlink:href="#info-fill"/>
+                            </svg>
+                            <div>
+                                <strong>Сведения о родителе: </strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Имя:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentName}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Фамилия:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentSurname}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Отчество:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentPatronymic}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> ИИН:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentIin}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Пол:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentGender}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Дата рождения:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentDateOfBirth}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Гражданство:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentCitizenship}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Национальность:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentNationality}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <div>
+                                <strong>Место жительства:</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Страна:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentCountry}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Населенный пункт:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentPopulatedLocality}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <div>
+                                <strong>Документ, удостоверяющий личность:</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Тип документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentTypeOfDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Номер документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentNumberOfDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Орган выдачи документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentIssuingAuthority}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b> Серия документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentSeriesOfDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
+                            <p><b> Дата выдачи документа:</b>
+                                <u>
+                                    <th:block th:text="${actNote.parentDateOfIssueOfTheDocument}"></th:block>
+                                </u>
+                            </p>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

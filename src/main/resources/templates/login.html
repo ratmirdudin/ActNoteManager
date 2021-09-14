@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Авторизация</title>
+    <div th:replace="fragments/header :: header-css"></div>
+    <link rel="stylesheet" href="/static/login.css">
+</head>
+<body class="text-center">
+
+<main class="form-signin">
+    <div class="alert alert-danger" role="alert" th:if="${param.error}">
+        Неверное имя или пароль
+    </div>
+
+    <div class="alert alert-success" role="alert" th:if="${param.logout}">
+        Вы успешно разлогинились
+    </div>
+    <form th:action="@{/login}" method="post">
+        <h1 class="h3 mb-3 fw-normal">Войдите в аккаунт</h1>
+
+        <div class="form-floating">
+            <input autofocus class="form-control" id="floatingInput" name="username" placeholder="Имя пользователя" required
+                   type="text">
+            <label for="floatingInput">Имя пользователя</label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" id="floatingPassword" name="password" placeholder="Пароль" type="password">
+            <label for="floatingPassword">Пароль</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+    </form>
+</main>
+
+
+</body>
+</html>

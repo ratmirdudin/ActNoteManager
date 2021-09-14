@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title> Новая запись </title>
+    <div th:replace="fragments/header :: header-css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+</svg>
+
+<div class="container mt-3">
+    <a class="btn btn-secondary btn-sm" href="javascript:history.back()"> Назад </a>
+    <form th:action="@{/act_note_manager/save}" th:object="${actNote}" method="POST">
+        <div class="container justify-content-center card bg-light">
+            <div class="row">
+                <div class="card-header text-center">
+                    <h2> Новая А/З </br> о рождении</h2>
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <p><b> Дата регистрации:</b>
+                            <u>
+                                <th:block th:text="*{dateOfRegistration}"></th:block>
+                            </u>
+                        </p>
+                        <input type="hidden" id="dateOfRegistration" th:field="*{dateOfRegistration}">
+                    </div>
+                </div>
+                <!--        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card bg-light">-->
+                <div class="col card bg-light">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="alert alert-primary d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                                    <use xlink:href="#info-fill"/>
+                                </svg>
+                                <div>
+                                    <strong>Сведения о ребенке: </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="childName"
+                                            placeholder="Имя"
+                                            th:field="*{childName}"
+                                            type="text">
+                                    <label for="childName"> Имя </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating col">
+                                    <input
+                                            class="form-control"
+                                            id="childSurname"
+                                            placeholder="Фамилия"
+                                            th:field="*{childSurname}"
+                                            type="text">
+                                    <label for="childSurname"> Фамилия </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="childPatronymic"
+                                            placeholder="Отчество"
+                                            th:field="*{childPatronymic}"
+                                            type="text">
+                                    <label for="childPatronymic"> Отчество </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="childIin"
+                                            placeholder="ИИН"
+                                            th:field="*{childIin}"
+                                            type="text">
+                                    <label for="childIin"> ИИН </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="childGender" th:field="*{childGender}">
+                                        <option th:value="'МУЖСКОЙ'" th:text="МУЖСКОЙ"></option>
+                                        <option th:value="'ЖЕНСКИЙ'" th:text="ЖЕНСКИЙ"></option>
+                                    </select>
+                                    <label for="childGender">Пол:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="childDateOfBirth"
+                                            placeholder="Дата рождения"
+                                            th:field="*{childDateOfBirth}"
+                                            type="text">
+                                    <label for="childDateOfBirth"> Дата рождения </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="childNumberOfChildrenBorn">Сколько родилось детей:</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="childNumberOfChildrenBorn" value="1"
+                                       th:field="*{childNumberOfChildrenBorn}">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="form-check">
+                                    <label>
+                                        <input type="checkbox" th:field="*{flagStatusOfNewborn}"/>
+                                        Брошенный ребенок / Мать
+                                        умерла
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <div>
+                                    <strong>Место рождения:</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="childCountry" th:field="*{childCountry}">
+                                        <option th:value="'КАЗАХСТАН'" th:text="КАЗАХСТАН"></option>
+                                    </select>
+                                    <label for="childCountry">Страна:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="childPopulatedLocality"
+                                            th:field="*{childPopulatedLocality}">
+                                        <option th:value="'НУР-СУЛТАН'" th:text="НУР-СУЛТАН"></option>
+                                        <option th:value="'АЛМАТЫ'" th:text="АЛМАТЫ"></option>
+                                        <option th:value="'ШЫМКЕНТ'" th:text="ШЫМКЕНТ"></option>
+                                    </select>
+                                    <label for="childPopulatedLocality">Населенный пункт:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                <div>
+                                    <strong>Документы, подтверждающие факт рождения ребенка:</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="childTypeOfDocument"
+                                            th:field="*{childTypeOfDocument}">
+                                        <option
+                                                th:value="'СВИДЕТЕЛЬСТВО_О_РОЖДЕНИИ'"
+                                                th:text="СВИДЕТЕЛЬСТВО_О_РОЖДЕНИИ">
+                                        </option>
+                                        <option
+                                                th:value="'ДРУГОЕ'"
+                                                th:text="ДРУГОЕ">
+                                        </option>
+                                    </select>
+                                    <label for="childTypeOfDocument">Тип документа:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="childNumberOfDocument"
+                                            placeholder="Номер документа"
+                                            th:field="*{childNumberOfDocument}"
+                                            type="text">
+                                    <label for="childNumberOfDocument"> Номер документа </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="childIssuingAuthority"
+                                            placeholder="Орган выдачи документа"
+                                            th:field="*{childIssuingAuthority}"
+                                            type="text">
+                                    <label for="childIssuingAuthority"> Орган выдачи документа </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating col">
+                                    <input
+                                            class="form-control"
+                                            id="childDateOfIssueOfTheDocument"
+                                            placeholder="Дата выдачи документа"
+                                            th:field="*{childDateOfIssueOfTheDocument}"
+                                            type="text">
+                                    <label for="childDateOfIssueOfTheDocument"> Дата выдачи документа </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col card bg-light">
+                    <div class="card-body">
+                        <!--////////////////////////////РОДИТЕЛИ//////////////////////-->
+                        <div class="row">
+                            <div class="alert alert-primary d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                                    <use xlink:href="#info-fill"/>
+                                </svg>
+                                <div>
+                                    <strong>Сведения о родителе: </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="parentName"
+                                            placeholder="Имя"
+                                            th:field="*{parentName}"
+                                            type="text">
+                                    <label for="parentName"> Имя </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating col">
+                                    <input
+                                            class="form-control"
+                                            id="parentSurname"
+                                            placeholder="Фамилия"
+                                            th:field="*{parentSurname}"
+                                            type="text">
+                                    <label for="parentSurname"> Фамилия </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="parentPatronymic"
+                                            placeholder="Отчество"
+                                            th:field="*{parentPatronymic}"
+                                            type="text">
+                                    <label for="parentPatronymic"> Отчество </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="parentIin"
+                                            placeholder="ИИН"
+                                            th:field="*{parentIin}"
+                                            type="text">
+                                    <label for="parentIin"> ИИН </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="parentGender" th:field="*{parentGender}">
+                                        <option th:value="'МУЖСКОЙ'" th:text="МУЖСКОЙ"></option>
+                                        <option th:value="'ЖЕНСКИЙ'" th:text="ЖЕНСКИЙ"></option>
+                                    </select>
+                                    <label for="parentGender">Пол:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="parentDateOfBirth"
+                                            placeholder="Дата рождения"
+                                            th:field="*{parentDateOfBirth}"
+                                            type="text">
+                                    <label for="parentDateOfBirth"> Дата рождения </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="parentCitizenship" th:field="*{parentCitizenship}">
+                                        <option th:value="'КАЗАХСТАН'" th:text="КАЗАХСТАН"></option>
+                                    </select>
+                                    <label for="parentCitizenship">Гражданство:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="parentNationality"
+                                            th:field="*{parentNationality}">
+                                        <option th:value="'РУССКАЯ'" th:text="РУССКАЯ"></option>
+                                        <option th:value="'КАЗАХСКАЯ'" th:text="КАЗАХСКАЯ"></option>
+                                    </select>
+                                    <label for="parentNationality">Национальность:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <div>
+                                    <strong>Место жительства:</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="parentCountry" th:field="*{parentCountry}">
+                                        <option th:value="'КАЗАХСТАН'" th:text="КАЗАХСТАН"></option>
+                                    </select>
+                                    <label for="parentCountry">Страна:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="parentPopulatedLocality"
+                                            th:field="*{parentPopulatedLocality}">
+                                        <option th:value="'НУР-СУЛТАН'" th:text="НУР-СУЛТАН"></option>
+                                        <option th:value="'АЛМАТЫ'" th:text="АЛМАТЫ"></option>
+                                        <option th:value="'ШЫМКЕНТ'" th:text="ШЫМКЕНТ"></option>
+                                    </select>
+                                    <label for="parentPopulatedLocality">Населенный пункт:</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                <div>
+                                    <strong>Документ, удостоверяющий личность:</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="parentTypeOfDocument"
+                                            th:field="*{parentTypeOfDocument}">
+                                        <option
+                                                th:value="'УДОСТОВЕРЕНИЕ_РК'"
+                                                th:text="УДОСТОВЕРЕНИЕ_РК">
+                                        </option>
+                                        <option
+                                                th:value="'ПАСПОРТ'"
+                                                th:text="ПАСПОРТ">
+                                        </option>
+                                        <option
+                                                th:value="'ДРУГОЕ'"
+                                                th:text="ДРУГОЕ">
+                                        </option>
+                                    </select>
+                                    <label for="parentTypeOfDocument">Тип документа:</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="parentNumberOfDocument"
+                                            placeholder="Номер документа"
+                                            th:field="*{parentNumberOfDocument}"
+                                            type="text">
+                                    <label for="parentNumberOfDocument"> Номер документа </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input
+                                            class="form-control"
+                                            id="parentIssuingAuthority"
+                                            placeholder="Орган выдачи документа"
+                                            th:field="*{parentIssuingAuthority}"
+                                            type="text">
+                                    <label for="parentIssuingAuthority"> Орган выдачи документа </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating col">
+                                    <input
+                                            class="form-control"
+                                            id="parentSeriesOfDocument"
+                                            placeholder="Серия документа"
+                                            th:field="*{parentSeriesOfDocument}"
+                                            type="text">
+                                    <label for="parentSeriesOfDocument"> Серия документа </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-floating col">
+                                    <input
+                                            class="form-control"
+                                            id="parentDateOfIssueOfTheDocument"
+                                            placeholder="Дата выдачи документа"
+                                            th:field="*{parentDateOfIssueOfTheDocument}"
+                                            type="text">
+                                    <label for="parentDateOfIssueOfTheDocument"> Дата выдачи документа </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="box-footer mt-3 mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        Сохранить
+                    </button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:fragment="header-css">
+        <!-- this is header-css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+              crossorigin="anonymous">
+    </div>
+</head>
+<body>
+<div th:fragment="header">
+    <!-- this is header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">ЗАГС</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarTogglerDemo02"
+                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/act_note_manager">Менеджер актовых записей</a>
+                        </li>
+                        <!--                    <li class="nav-item">-->
+                        <!--                        <a class="nav-link" href="/product_manager">Продуктовый менеджер</a>-->
+                        <!--                    </li>-->
+                    </ul>
+                    <span class="navbar-text">
+                    <span sec:authorize="isAuthenticated()"> </span>
+                    Авторизованный пользователь:&nbsp;<b> <span sec:authentication="name"> </span>,&nbsp; </b>
+                    Роли:&nbsp;<span sec:authentication="principal.authorities"></span>&nbsp;
+                </span>
+                    <form th:action="@{/logout}" method="post" class="d-flex">
+                        <button class="btn btn-outline-success btn-sm" type="submit">Выйти</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+</div>
+
+</body>
+</html>
